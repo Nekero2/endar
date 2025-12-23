@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мировые новогодние календари</title>
+    <title>Мировые новогодние календари 2026</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #001f3f 0%, #0a3d62 100%);
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b3a4b 100%);
             color: #e6f2ff;
             min-height: 100vh;
             padding: 20px;
@@ -30,7 +30,7 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 35px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
         }
@@ -48,6 +48,18 @@
             text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
         }
 
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
         .subtitle {
             font-size: 1.2rem;
             color: #a0d2ff;
@@ -62,6 +74,58 @@
             display: inline-block;
             margin: 15px 0;
             border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .timer-container {
+            background: rgba(255, 107, 107, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e53, #ffd166);
+        }
+
+        .timer-title {
+            font-size: 1.3rem;
+            color: #ffd166;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .timer-units {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .timer-unit {
+            font-size: 0.9rem;
+            color: #a0d2ff;
         }
 
         .calendars-grid {
@@ -138,26 +202,12 @@
             gap: 10px;
         }
 
-        .timer-container {
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 25px 0;
-            border: 1px solid rgba(255, 107, 107, 0.3);
-        }
-
-        .timer-title {
-            font-size: 1.1rem;
-            color: #ff6b6b;
-            margin-bottom: 10px;
-        }
-
-        .timer {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffd700;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
+        .holiday-item {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid;
         }
 
         .controls {
@@ -165,7 +215,7 @@
         }
 
         .btn {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            background: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
             color: white;
             border: none;
             padding: 15px 35px;
@@ -174,12 +224,12 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 8px 20px rgba(77, 171, 247, 0.4);
         }
 
         .footer {
@@ -195,6 +245,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         .fade-in {
             animation: fadeIn 0.6s ease-out;
         }
@@ -206,6 +262,13 @@
             opacity: 0.8;
             pointer-events: none;
             z-index: -1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
         }
 
         @media (max-width: 768px) {
@@ -217,8 +280,19 @@
                 font-size: 2.2rem;
             }
             
+            .timer {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+            
             .calendars-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .year-badge {
+                display: block;
+                margin: 10px auto;
+                width: fit-content;
             }
         }
     </style>
@@ -229,14 +303,25 @@
 
     <div class="container fade-in">
         <div class="header">
-            <h1>🌍 Мировые новогодние календари</h1>
-            <div class="subtitle">Параллельные даты в календарях разных культур</div>
+            <h1>🌍 Мировые календари 
+                <span class="year-badge">2026</span>
+            </h1>
+            <div class="subtitle">Параллельные даты в календарях разных культур до 2026 года</div>
             <div class="today-date" id="todayDate">Загрузка даты...</div>
         </div>
 
         <div class="timer-container">
-            <div class="timer-title">До Нового 2025 года осталось:</div>
+            <div class="timer-title">
+                <span>⏳</span>
+                До Нового 2026 года осталось:
+            </div>
             <div class="timer" id="newYearTimer">00:00:00:00</div>
+            <div class="timer-units">
+                <span class="timer-unit">дни</span>
+                <span class="timer-unit">часы</span>
+                <span class="timer-unit">минуты</span>
+                <span class="timer-unit">секунды</span>
+            </div>
         </div>
 
         <div class="calendars-grid" id="calendarsGrid">
@@ -244,21 +329,28 @@
         </div>
 
         <div class="new-year-info">
-            <div class="new-year-title">🎉 Ближайшие новогодние праздники в мире:</div>
+            <div class="new-year-title">🎉 Ближайшие новогодние праздники 2025-2026:</div>
             <div id="nextHolidays">Загрузка данных...</div>
         </div>
 
         <div class="controls">
-            <button class="btn" id="refreshBtn">Обновить данные</button>
+            <button class="btn" id="refreshBtn">
+                <span id="btnIcon">🔄</span> Обновить календари
+            </button>
         </div>
 
         <div class="footer">
-            Календарь показывает параллельные даты в различных календарных системах мира<br>
-            Данные обновляются в реальном времени • Новогодняя версия 2024
+            Сравнение календарных систем мира • Отсчёт до 2026 года<br>
+            Данные обновляются в реальном времени • Версия 2025
         </div>
     </div>
 
     <script>
+        // Константы для 2026 года
+        const TARGET_YEAR = 2026;
+        const CURRENT_YEAR = new Date().getFullYear();
+        const YEARS_LEFT = TARGET_YEAR - CURRENT_YEAR;
+
         // База данных мировых календарей
         const worldCalendars = [
             {
@@ -266,15 +358,13 @@
                 name: "Григорианский",
                 icon: "📅",
                 color: "#3498db",
-                currentDate: "",
-                currentYear: "",
                 info: "Стандартный международный календарь. Новый год — 1 января.",
                 getCurrentDate: function() {
                     const now = new Date();
                     const options = { day: 'numeric', month: 'long', year: 'numeric' };
                     return {
                         date: now.toLocaleDateString('ru-RU', options),
-                        year: now.getFullYear()
+                        year: `До 2026: ${TARGET_YEAR - now.getFullYear()} год${TARGET_YEAR - now.getFullYear() > 1 ? 'а' : ''}`
                     };
                 }
             },
@@ -283,18 +373,17 @@
                 name: "Китайский",
                 icon: "🐉",
                 color: "#e74c3c",
-                currentDate: "",
-                currentYear: "",
-                info: "Лунно-солнечный календарь. Новый год (Чуньцзе) — переменная дата (январь-февраль).",
+                info: `Следующий Год Лошади в 2026. Новый год — переменная дата (январь-февраль).`,
                 getCurrentDate: function() {
                     const now = new Date();
                     const chineseYears = ["Дракона", "Змеи", "Лошади", "Овцы", "Обезьяны", 
                                          "Петуха", "Собаки", "Свиньи", "Крысы", "Быка", "Тигра", "Кролика"];
-                    const currentCycleYear = (now.getFullYear() - 1900) % 60;
-                    const zodiacIndex = (currentCycleYear - 1) % 12;
+                    const nextHorseYear = 2026; // Следующий год Лошади
+                    const yearsToHorse = nextHorseYear - now.getFullYear();
+                    
                     return {
                         date: `${now.getDate()} ${this.getChineseMonth(now.getMonth())}`,
-                        year: `Год ${chineseYears[zodiacIndex]}`
+                        year: `До Года Лошади (2026): ${yearsToHorse} год${yearsToHorse > 1 ? 'а' : ''}`
                     };
                 },
                 getChineseMonth: function(month) {
@@ -309,21 +398,23 @@
                 name: "Исламский",
                 icon: "🌙",
                 color: "#2ecc71",
-                currentDate: "",
-                currentYear: "",
-                info: "Лунный календарь Хиджры. Новый год — 1 Мухаррама (переменная дата).",
+                info: "Лунный календарь Хиджры. К 2026 году: ~1447-1448 год Хиджры.",
                 getCurrentDate: function() {
                     const now = new Date();
-                    // Приблизительный расчёт исламской даты
                     const hijriYear = Math.floor((now.getFullYear() - 622) * (33/32));
-                    const islamicMonths = ["Мухаррам", "Сафар", "Раби аль-авваль", "Раби ас-сани",
-                                          "Джумада аль-уля", "Джумада аль-ахира", "Раджаб",
-                                          "Шаабан", "Рамадан", "Шавваль", "Зуль-каада", "Зуль-хиджа"];
-                    const monthIndex = now.getMonth();
+                    const hijri2026 = Math.floor((2026 - 622) * (33/32));
+                    const yearsTo2026 = hijri2026 - hijriYear;
+                    
                     return {
-                        date: `${now.getDate()} ${islamicMonths[monthIndex]}`,
-                        year: `${hijriYear} год Хиджры`
+                        date: `${now.getDate()} ${this.getIslamicMonth(now.getMonth())}`,
+                        year: `До 1448 г.Х. (2026): ~${Math.abs(yearsTo2026)} год${Math.abs(yearsTo2026) > 1 ? 'а' : ''}`
                     };
+                },
+                getIslamicMonth: function(month) {
+                    const months = ["Мухаррам", "Сафар", "Раби аль-авваль", "Раби ас-сани",
+                                  "Джумада аль-уля", "Джумада аль-ахира", "Раджаб",
+                                  "Шаабан", "Рамадан", "Шавваль", "Зуль-каада", "Зуль-хиджа"];
+                    return months[month];
                 }
             },
             {
@@ -331,20 +422,23 @@
                 name: "Еврейский",
                 icon: "✡️",
                 color: "#f39c12",
-                currentDate: "",
-                currentYear: "",
-                info: "Лунно-солнечный календарь. Новый год (Рош ха-Шана) — сентябрь-октябрь.",
+                info: "К 2026 году: ~5786-5787 год от Сотворения мира.",
                 getCurrentDate: function() {
                     const now = new Date();
                     const jewishYear = now.getFullYear() + 3760;
-                    const jewishMonths = ["Тишрей", "Хешван", "Кислев", "Тевет", "Шват",
-                                         "Адар", "Нисан", "Ияр", "Сиван", "Таммуз",
-                                         "Ав", "Элул"];
-                    const monthIndex = now.getMonth();
+                    const jewish2026 = 2026 + 3760;
+                    const yearsTo2026 = jewish2026 - jewishYear;
+                    
                     return {
-                        date: `${now.getDate()} ${jewishMonths[monthIndex]}`,
-                        year: `${jewishYear} год`
+                        date: `${now.getDate()} ${this.getJewishMonth(now.getMonth())}`,
+                        year: `До 5787 г. (2026): ${yearsTo2026} год${yearsTo2026 > 1 ? 'а' : ''}`
                     };
+                },
+                getJewishMonth: function(month) {
+                    const months = ["Тишрей", "Хешван", "Кислев", "Тевет", "Шват",
+                                   "Адар", "Нисан", "Ияр", "Сиван", "Таммуз",
+                                   "Ав", "Элул"];
+                    return months[month];
                 }
             },
             {
@@ -352,20 +446,23 @@
                 name: "Индийский",
                 icon: "🕉️",
                 color: "#9b59b6",
-                currentDate: "",
-                currentYear: "",
-                info: "Национальный календарь Индии. Новый год — 22 марта (в некоторых штатах другие даты).",
+                info: "Национальный календарь Индии. К 2026: ~1947-1948 год Сака.",
                 getCurrentDate: function() {
                     const now = new Date();
                     const indianYear = now.getFullYear() - 78;
-                    const indianMonths = ["Чайтра", "Ваисакха", "Джанштха", "Ашадха",
-                                         "Шравана", "Бхадра", "Ашвин", "Картика",
-                                         "Аграхайана", "Пауза", "Магха", "Пхальгуна"];
-                    const monthIndex = now.getMonth();
+                    const indian2026 = 2026 - 78;
+                    const yearsTo2026 = indian2026 - indianYear;
+                    
                     return {
-                        date: `${now.getDate()} ${indianMonths[monthIndex]}`,
-                        year: `${indianYear} год Сака`
+                        date: `${now.getDate()} ${this.getIndianMonth(now.getMonth())}`,
+                        year: `До 1948 г.Сака (2026): ${yearsTo2026} год${yearsTo2026 > 1 ? 'а' : ''}`
                     };
+                },
+                getIndianMonth: function(month) {
+                    const months = ["Чайтра", "Ваисакха", "Джанштха", "Ашадха",
+                                   "Шравана", "Бхадра", "Ашвин", "Картика",
+                                   "Аграхайана", "Пауза", "Магха", "Пхальгуна"];
+                    return months[month];
                 }
             },
             {
@@ -373,31 +470,54 @@
                 name: "Персидский",
                 icon: "☀️",
                 color: "#e67e22",
-                currentDate: "",
-                currentYear: "",
-                info: "Солнечный календарь. Новый год (Навруз) — 20-21 марта.",
+                info: "Солнечный календарь. К 2026: ~1404-1405 год.",
                 getCurrentDate: function() {
                     const now = new Date();
                     const persianYear = now.getFullYear() - 621;
-                    const persianMonths = ["Фарвардин", "Ордибехешт", "Хордад", "Тир",
-                                          "Мордад", "Шахривар", "Мехр", "Абан",
-                                          "Азар", "Дей", "Бахман", "Эсфанд"];
-                    const monthIndex = now.getMonth();
+                    const persian2026 = 2026 - 621;
+                    const yearsTo2026 = persian2026 - persianYear;
+                    
                     return {
-                        date: `${now.getDate()} ${persianMonths[monthIndex]}`,
-                        year: `${persianYear} год`
+                        date: `${now.getDate()} ${this.getPersianMonth(now.getMonth())}`,
+                        year: `До 1405 г. (2026): ${yearsTo2026} год${yearsTo2026 > 1 ? 'а' : ''}`
                     };
+                },
+                getPersianMonth: function(month) {
+                    const months = ["Фарвардин", "Ордибехешт", "Хордад", "Тир",
+                                  "Мордад", "Шахривар", "Мехр", "Абан",
+                                  "Азар", "Дей", "Бахман", "Эсфанд"];
+                    return months[month];
                 }
             }
         ];
 
-        // Ближайшие новогодние праздники
-        const newYearHolidays = [
-            { name: "Новый год (григорианский)", date: "1 января 2025", daysLeft: null },
-            { name: "Китайский Новый год", date: "29 января 2025", daysLeft: null },
-            { name: "Исламский Новый год", date: "19 июля 2025", daysLeft: null },
-            { name: "Еврейский Новый год", date: "23 сентября 2025", daysLeft: null },
-            { name: "Персидский Новый год", date: "20 марта 2025", daysLeft: null }
+        // Новогодние праздники 2025-2026
+        const newYearHolidays2026 = [
+            { 
+                name: "Новый год 2026 (григорианский)", 
+                date: "1 января 2026",
+                color: "#3498db"
+            },
+            { 
+                name: "Китайский Новый год 2026", 
+                date: "17 февраля 2026 (Год Лошади)",
+                color: "#e74c3c"
+            },
+            { 
+                name: "Навруз 2026 (персидский Новый год)", 
+                date: "20 марта 2026",
+                color: "#e67e22"
+            },
+            { 
+                name: "Рош ха-Шана 2026 (еврейский Новый год)", 
+                date: "12-14 сентября 2026",
+                color: "#f39c12"
+            },
+            { 
+                name: "Исламский Новый год 1448", 
+                date: "19 июля 2026 (1 Мухаррама 1448)",
+                color: "#2ecc71"
+            }
         ];
 
         // Получение текущей даты
@@ -407,16 +527,15 @@
             return now.toLocaleDateString('ru-RU', options);
         }
 
-        // Обновление таймера до Нового года
-        function updateNewYearTimer() {
+        // Обновление таймера до 2026 года
+        function updateTimerTo2026() {
             const now = new Date();
-            const nextYear = now.getFullYear() + 1;
-            const newYearDate = new Date(nextYear, 0, 1, 0, 0, 0);
+            const targetDate = new Date(2026, 0, 1, 0, 0, 0); // 1 января 2026
             
-            const diff = newYearDate - now;
+            const diff = targetDate - now;
             
             if (diff <= 0) {
-                document.getElementById('newYearTimer').textContent = "С Новым Годом! 🎉";
+                document.getElementById('newYearTimer').textContent = "2026 НАСТУПИЛ! 🎉";
                 return;
             }
             
@@ -425,24 +544,30 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
+            // Форматируем с ведущими нулями
+            const formattedDays = days.toString().padStart(3, '0');
+            const formattedHours = hours.toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            const formattedSeconds = seconds.toString().padStart(2, '0');
+            
             document.getElementById('newYearTimer').textContent = 
-                `${days} д. ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                `${formattedDays}:${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
         }
 
         // Создание снежинок
         function createSnowflakes() {
             const snowflakesContainer = document.getElementById('snowflakes');
-            const snowflakeCount = 30;
+            const snowflakeCount = 50;
             
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
-                snowflake.innerHTML = '❄';
+                snowflake.innerHTML = Math.random() > 0.5 ? '❄' : '✨';
                 snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                snowflake.style.animationDuration = Math.random() * 10 + 5 + 's';
                 snowflake.style.animationDelay = Math.random() * 5 + 's';
-                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
-                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                snowflake.style.opacity = Math.random() * 0.6 + 0.2;
+                snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
                 snowflakeContainer.appendChild(snowflake);
             }
         }
@@ -458,6 +583,7 @@
                 const calendarCard = document.createElement('div');
                 calendarCard.className = 'calendar-card fade-in';
                 calendarCard.style.borderTopColor = calendar.color;
+                calendarCard.style.boxShadow = `0 5px 15px ${calendar.color}40`;
                 
                 calendarCard.innerHTML = `
                     <div class="calendar-icon">${calendar.icon}</div>
@@ -477,21 +603,29 @@
             const holidaysList = document.getElementById('nextHolidays');
             let html = '';
             
-            newYearHolidays.forEach(holiday => {
-                // Простой расчёт дней до праздника
-                let daysLeft = "?";
-                if (holiday.date.includes("1 января")) {
-                    const nextYear = now.getFullYear() + 1;
-                    const targetDate = new Date(nextYear, 0, 1);
-                    daysLeft = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
-                } else if (holiday.date.includes("29 января")) {
-                    const targetYear = now.getMonth() < 0 ? now.getFullYear() + 1 : now.getFullYear();
-                    const targetDate = new Date(targetYear, 0, 29);
-                    daysLeft = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+            newYearHolidays2026.forEach(holiday => {
+                // Рассчитываем дни до праздника
+                let targetDate;
+                if (holiday.date.includes("1 января 2026")) {
+                    targetDate = new Date(2026, 0, 1);
+                } else if (holiday.date.includes("17 февраля")) {
+                    targetDate = new Date(2026, 1, 17);
+                } else if (holiday.date.includes("20 марта")) {
+                    targetDate = new Date(2026, 2, 20);
+                } else if (holiday.date.includes("12-14 сентября")) {
+                    targetDate = new Date(2026, 8, 12);
+                } else if (holiday.date.includes("19 июля")) {
+                    targetDate = new Date(2026, 6, 19);
+                } else {
+                    targetDate = new Date(2026, 0, 1);
                 }
                 
-                html += `<div style="margin-bottom: 10px;">
-                    <strong>${holiday.name}</strong>: ${holiday.date} (через ${daysLeft} дней)
+                const diffDays = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+                
+                html += `
+                <div class="holiday-item" style="border-left-color: ${holiday.color}">
+                    <strong>${holiday.name}</strong><br>
+                    <small>${holiday.date} (через ${diffDays} дн.)</small>
                 </div>`;
             });
             
@@ -501,7 +635,8 @@
         // Инициализация приложения
         function initApp() {
             // Устанавливаем текущую дату
-            document.getElementById('todayDate').textContent = `Сегодня: ${getCurrentDate()}`;
+            document.getElementById('todayDate').textContent = 
+                `Сегодня: ${getCurrentDate()} • До 2026: ${YEARS_LEFT} год${YEARS_LEFT > 1 ? 'а' : ''}`;
             
             // Отображаем календари
             displayCalendars();
@@ -513,24 +648,32 @@
             createSnowflakes();
             
             // Кнопка обновления
-            document.getElementById('refreshBtn').addEventListener('click', function() {
+            const refreshBtn = document.getElementById('refreshBtn');
+            const btnIcon = document.getElementById('btnIcon');
+            
+            refreshBtn.addEventListener('click', function() {
                 displayCalendars();
                 updateHolidays();
-                this.textContent = 'Данные обновлены!';
+                updateTimerTo2026();
+                
+                // Анимация кнопки
+                btnIcon.textContent = '✅';
+                refreshBtn.style.background = 'linear-gradient(135deg, #4caf50 0%, #2e7d32 100%)';
+                
                 setTimeout(() => {
-                    this.textContent = 'Обновить данные';
+                    btnIcon.textContent = '🔄';
+                    refreshBtn.style.background = 'linear-gradient(135deg, #4dabf7 0%, #339af0 100%)';
                 }, 2000);
             });
             
-            // Запускаем таймеры
-            setInterval(updateNewYearTimer, 1000);
-            updateNewYearTimer();
+            // Запускаем таймер
+            setInterval(updateTimerTo2026, 1000);
+            updateTimerTo2026();
             
-            // Обновляем каждую минуту
+            // Обновляем каждые 30 секунд
             setInterval(() => {
-                displayCalendars();
-                updateHolidays();
-            }, 60000);
+                updateTimerTo2026();
+            }, 30000);
         }
 
         // Запускаем приложение
